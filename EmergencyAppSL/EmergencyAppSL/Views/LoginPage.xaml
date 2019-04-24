@@ -24,12 +24,14 @@
 
         <Entry
             Grid.Row="2"
+            Keyboard="Email"
             Placeholder="Username/Email"
             PlaceholderColor="Gray"
             Visual="Material" />
         <Entry
             Grid.Row="3"
             IsPassword="True"
+            Keyboard="Default"
             Placeholder="Password"
             PlaceholderColor="Gray"
             Visual="Material" />

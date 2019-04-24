@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EmergencyAppSL.Views.ReportHistoryPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="History"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <Grid>
+        <ListView
+            HasUnevenRows="True"
+            ItemsSource="{Binding ReportHistoryList}"
+            SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Image
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                BackgroundColor="Red"
+                                HeightRequest="100"
+                                HorizontalOptions="Start"
+                                WidthRequest="100" />
+
+                            <StackLayout Grid.Row="0" Grid.Column="1">
+                                <Label FontAttributes="Bold" Text="Event Title" />
+                                <Label Text="Event Description" />
+                                <Label Text="Event Date" />
+                            </StackLayout>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>

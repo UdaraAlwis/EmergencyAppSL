@@ -24,7 +24,7 @@ namespace EmergencyAppSL
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync($"NavigationPage/{nameof(LandingPage)}");
+            await NavigationService.NavigateAsync($"NavigationPage/{nameof(ReportHistoryPage)}");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -34,6 +34,7 @@ namespace EmergencyAppSL
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<RegistrationPage, RegistrationPageViewModel>();
             containerRegistry.RegisterForNavigation<LandingPage, LandingPageViewModel>();
+            containerRegistry.RegisterForNavigation<ReportHistoryPage, ReportHistoryPageViewModel>();
         }
     }
 }

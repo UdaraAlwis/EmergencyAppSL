@@ -25,28 +25,38 @@
 
             <StackLayout Grid.Row="2" VerticalOptions="Center">
                 <Entry
+                    Keyboard="Text"
                     Placeholder="First Name"
                     PlaceholderColor="Gray"
                     Visual="Material" />
                 <Entry
+                    Keyboard="Text"
                     Placeholder="Last Name"
                     PlaceholderColor="Gray"
                     Visual="Material" />
                 <Entry
+                    Keyboard="Default"
                     Placeholder="NIC Number"
                     PlaceholderColor="Gray"
                     Visual="Material" />
                 <Entry
+                    Keyboard="Telephone"
                     Placeholder="Phone Number"
                     PlaceholderColor="Gray"
                     Visual="Material" />
                 <Entry
+                    Keyboard="Email"
                     Placeholder="Email"
                     PlaceholderColor="Gray"
                     Visual="Material" />
                 <Entry
                     IsPassword="True"
                     Placeholder="Password"
+                    PlaceholderColor="Gray"
+                    Visual="Material" />
+                <Entry
+                    IsPassword="True"
+                    Placeholder="ConfirmPassword"
                     PlaceholderColor="Gray"
                     Visual="Material" />
             </StackLayout>
