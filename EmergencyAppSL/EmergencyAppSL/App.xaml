@@ -9,8 +9,8 @@
         <!--  Application resource dictionary  -->
         <!--  Styles  -->
         <Style TargetType="NavigationPage">
-            <Setter Property="BarBackgroundColor" Value="White" />
-            <Setter Property="BarTextColor" Value="Black" />
+            <Setter Property="BarBackgroundColor" Value="#e04a00" />
+            <Setter Property="BarTextColor" Value="White" />
         </Style>
         <!--  Styles  -->
 

@@ -27,7 +27,6 @@
             HorizontalTextAlignment="Center"
             Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc viverra consectetur quam eget consequat nisl. Proin a vehicula ante. Nullam pretium." />
 
-
         <Grid
             Grid.Row="2"
             Margin="0,0,0,20"

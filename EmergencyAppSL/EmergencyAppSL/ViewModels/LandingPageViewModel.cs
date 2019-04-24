@@ -11,6 +11,7 @@ namespace EmergencyAppSL.ViewModels
 	public class LandingPageViewModel : BindableBase
     {
         private readonly INavigationService _navigationService;
+
         public DelegateCommand GoToLoginCommand { get; private set; }
 
         public DelegateCommand GoToRegisterCommand { get; private set; }
@@ -26,12 +27,12 @@ namespace EmergencyAppSL.ViewModels
 
         private void GoToRegister()
         {
-            _navigationService.NavigateAsync(nameof(LoginPage));
+            _navigationService.NavigateAsync(nameof(RegistrationPage));
         }
 
         private void GoToLogin()
         {
-            _navigationService.NavigateAsync(nameof(RegistrationPage));
+            _navigationService.NavigateAsync(nameof(LoginPage));
         }
     }
 }

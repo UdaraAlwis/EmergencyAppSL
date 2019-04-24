@@ -3,9 +3,47 @@
     x:Class="EmergencyAppSL.Views.RegistrationPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:extensions="clr-namespace:EmergencyAppSL.Extensions;assembly=EmergencyAppSL"
+    xmlns:iOsSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="Registration"
+    iOsSpecific:Page.UseSafeArea="True"
     prism:ViewModelLocator.AutowireViewModel="True">
 
-    <BoxView HeightRequest="1" Color="{StaticResource AccentColor}" />
+    <Grid Padding="20,10,20,10">
 
+        <Image
+            Grid.Row="0"
+            Margin="0,30,0,0"
+            Aspect="AspectFit"
+            HeightRequest="100"
+            HorizontalOptions="FillAndExpand"
+            Source="{extensions:ImageResource EmergencyAppSL.Resources.applogo.png}"
+            VerticalOptions="FillAndExpand"
+            WidthRequest="100" />
+
+        <StackLayout Grid.Row="2" VerticalOptions="Center">
+            <Entry Placeholder="First Name" />
+            <Entry Placeholder="Last Name" />
+            <Entry Placeholder="NIC Number" />
+            <Entry Placeholder="Phone Number" />
+            <Entry Placeholder="Email" />
+            <Entry IsPassword="True" Placeholder="Password" />
+        </StackLayout>
+
+        <Button
+            Grid.Row="3"
+            BackgroundColor="#e04a00"
+            FontSize="20"
+            HeightRequest="50"
+            Text="Register"
+            TextColor="White" />
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+    </Grid>
 </ContentPage>
