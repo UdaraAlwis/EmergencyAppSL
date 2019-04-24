@@ -10,16 +10,12 @@
     prism:ViewModelLocator.AutowireViewModel="True">
 
     <Grid Padding="20,10,20,10">
-        <Entry
-            Grid.Row="1"
-            Placeholder="Username/Email"
-            Visual="Material" />
+        <Entry Grid.Row="1" Placeholder="Username/Email" />
 
         <Entry
             Grid.Row="2"
             IsPassword="True"
-            Placeholder="Password"
-            Visual="Material" />
+            Placeholder="Password" />
 
         <Button
             Grid.Row="4"

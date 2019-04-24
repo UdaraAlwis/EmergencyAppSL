@@ -23,7 +23,7 @@
         <Label
             Grid.Row="1"
             Margin="0,20,0,20"
-            FontSize="15"
+            FontSize="17"
             HorizontalTextAlignment="Center"
             Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc viverra consectetur quam eget consequat nisl. Proin a vehicula ante. Nullam pretium." />
 
