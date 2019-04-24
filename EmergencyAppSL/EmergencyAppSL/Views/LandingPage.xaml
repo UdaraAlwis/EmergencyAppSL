@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EmergencyAppSL.Views.LandingPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:extensions="clr-namespace:EmergencyAppSL.Extensions;assembly=EmergencyAppSL"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="Emergency App"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+    <Grid Padding="20,10,20,10">
+
+        <Image
+            Grid.Row="0"
+            Margin="0,30,0,0"
+            Aspect="AspectFit"
+            HeightRequest="100"
+            HorizontalOptions="FillAndExpand"
+            Source="{extensions:ImageResource EmergencyAppSL.Resources.applogo.png}"
+            VerticalOptions="FillAndExpand"
+            WidthRequest="100" />
+
+        <Label
+            Grid.Row="1"
+            Margin="0,20,0,20"
+            FontSize="15"
+            HorizontalTextAlignment="Center"
+            Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc viverra consectetur quam eget consequat nisl. Proin a vehicula ante. Nullam pretium." />
+
+
+        <Grid
+            Grid.Row="2"
+            Margin="0,0,0,20"
+            VerticalOptions="End">
+            <Button
+                Grid.Row="0"
+                BackgroundColor="#e04a00"
+                Command="{Binding GoToLoginCommand}"
+                FontSize="20"
+                HeightRequest="50"
+                Text="Login"
+                TextColor="White" />
+
+            <Button
+                Grid.Row="1"
+                BackgroundColor="#e04a00"
+                Command="{Binding GoToRegisterCommand}"
+                FontSize="20"
+                HeightRequest="50"
+                Text="Registration"
+                TextColor="White" />
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+        </Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+    </Grid>
+
+</ContentPage>

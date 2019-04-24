@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication
+    x:Class="EmergencyAppSL.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms">
+    <Application.Resources>
+
+        <!--  Application resource dictionary  -->
+        <!--  Styles  -->
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="White" />
+            <Setter Property="BarTextColor" Value="Black" />
+        </Style>
+        <!--  Styles  -->
+
+        <!--  Font Family  -->
+        <OnPlatform x:Key="FontFamilyBold" x:TypeArguments="x:String">
+            <On Platform="Android" Value="sans-serif-black" />
+            <On Platform="iOS" Value="HelveticaNeue-Bold" />
+        </OnPlatform>
+
+        <OnPlatform x:Key="FontFamilyMedium" x:TypeArguments="x:String">
+            <On Platform="Android" Value="sans-serif-medium" />
+            <On Platform="iOS" Value="HelveticaNeue-Medium" />
+        </OnPlatform>
+
+        <OnPlatform x:Key="FontFamilyDefault" x:TypeArguments="x:String">
+            <On Platform="Android" Value="sans-serif" />
+            <On Platform="iOS" Value="HelveticaNeue" />
+        </OnPlatform>
+
+    </Application.Resources>
+</prism:PrismApplication>

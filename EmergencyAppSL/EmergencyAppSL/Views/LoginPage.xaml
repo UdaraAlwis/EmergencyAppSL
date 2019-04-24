@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EmergencyAppSL.Views.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:iOsSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="Login"
+    iOsSpecific:Page.UseSafeArea="True"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+    <Grid Padding="20,10,20,10">
+        <Entry
+            Grid.Row="1"
+            Placeholder="Username/Email"
+            Visual="Material" />
+
+        <Entry
+            Grid.Row="2"
+            IsPassword="True"
+            Placeholder="Password"
+            Visual="Material" />
+
+        <Button
+            Grid.Row="4"
+            BackgroundColor="DodgerBlue"
+            Text="Login"
+            TextColor="White" />
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+    </Grid>
+
+</ContentPage>
