@@ -22,11 +22,17 @@
             VerticalOptions="FillAndExpand"
             WidthRequest="100" />
 
-        <Entry Grid.Row="2" Placeholder="Username/Email" />
+        <Entry
+            Grid.Row="2"
+            Placeholder="Username/Email"
+            PlaceholderColor="Gray"
+            Visual="Material" />
         <Entry
             Grid.Row="3"
             IsPassword="True"
-            Placeholder="Password" />
+            Placeholder="Password"
+            PlaceholderColor="Gray"
+            Visual="Material" />
 
         <Button
             Grid.Row="4"
