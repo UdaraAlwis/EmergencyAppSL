@@ -8,5 +8,7 @@ namespace EmergencyAppSL.Services
     public interface IReportService
     {
         List<SuspiciousReport> GetReportHistoryList();
+
+        bool CreateReport(SuspiciousReport report);
     }
 }

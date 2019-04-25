@@ -1,11 +1,7 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using Plugin.CurrentActivity;
 using Prism;
 using Prism.Ioc;
 
@@ -25,7 +21,16 @@ namespace EmergencyAppSL.Droid
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(false);
 
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
+
+            global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
+
             LoadApplication(new App(new AndroidInitializer()));
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
+        {
+            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 

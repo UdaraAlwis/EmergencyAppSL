@@ -5,76 +5,96 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:extensions="clr-namespace:EmergencyAppSL.Extensions;assembly=EmergencyAppSL"
     xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:iOsSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="Create Report"
+    iOsSpecific:Page.UseSafeArea="true"
     prism:ViewModelLocator.AutowireViewModel="True">
 
     <ScrollView>
-        <Grid Padding="20,10,20,10">
+        <StackLayout Padding="20,10,20,10">
 
-            <Image
-                Grid.Row="0"
-                Margin="0,30,0,0"
-                Aspect="AspectFit"
-                HeightRequest="100"
-                HorizontalOptions="FillAndExpand"
-                Source="{extensions:ImageResource EmergencyAppSL.Resources.applogo.png}"
-                VerticalOptions="FillAndExpand"
-                WidthRequest="100" />
+            <Entry
+                Keyboard="Text"
+                Placeholder="Title (explain in short)"
+                PlaceholderColor="Gray"
+                Visual="Material" />
 
-            <StackLayout Grid.Row="2" VerticalOptions="Center">
+            <Frame
+                Padding="0"
+                HeightRequest="150"
+                IsClippedToBounds="True">
+                <Grid>
+                    <Label
+                        Margin="0,20,0,20"
+                        FontSize="17"
+                        HorizontalTextAlignment="Center"
+                        LineBreakMode="WordWrap"
+                        Text="Capture or Attach supporting evidence photos."
+                        WidthRequest="100" />
 
-                <forms:CachedImage
-                    Aspect="AspectFill"
-                    CacheDuration="1"
-                    DownsampleToViewSize="True"
-                    FadeAnimationEnabled="True"
-                    FadeAnimationForCachedImages="True"
-                    HorizontalOptions="FillAndExpand"
-                    Source="{Binding CapturedImage}" />
+                    <forms:CachedImage
+                        Aspect="AspectFill"
+                        DownsampleToViewSize="True"
+                        Source="{Binding CapturedPhoto}" />
 
-                <Entry
-                    Keyboard="Text"
-                    Placeholder="Title (explain in short)"
-                    PlaceholderColor="Gray"
-                    Visual="Material" />
-                <Editor
-                    Keyboard="Text"
-                    Placeholder="Description (full explanation)"
-                    PlaceholderColor="Gray"
-                    Visual="Material" />
+                    <Image
+                        Margin="0,5,5,0"
+                        HeightRequest="40"
+                        HorizontalOptions="End"
+                        Source="{extensions:ImageResource EmergencyAppSL.Resources.addPhotoIcon.png}"
+                        VerticalOptions="Start"
+                        WidthRequest="40">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddPhotoCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image
+                        Margin="0,5,5,0"
+                        HeightRequest="40"
+                        HorizontalOptions="End"
+                        IsVisible="{Binding IsPhotoAttached}"
+                        Source="{extensions:ImageResource EmergencyAppSL.Resources.removePhotoIcon.png}"
+                        VerticalOptions="Start"
+                        WidthRequest="40">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RemovePhotoCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+            </Frame>
 
-                <Entry
-                    Keyboard="Default"
-                    Placeholder="NIC Number"
-                    PlaceholderColor="Gray"
-                    Visual="Material" />
-                <Entry
-                    Keyboard="Telephone"
-                    Placeholder="Phone Number"
-                    PlaceholderColor="Gray"
-                    Visual="Material" />
-                <Entry
-                    Keyboard="Email"
-                    Placeholder="Email"
-                    PlaceholderColor="Gray"
-                    Visual="Material" />
-            </StackLayout>
+            <Editor
+                Keyboard="Text"
+                Placeholder="Description (full explanation)"
+                PlaceholderColor="Gray"
+                Visual="Material" />
+
+            <Entry
+                Keyboard="Default"
+                Placeholder="NIC Number"
+                PlaceholderColor="Gray"
+                Visual="Material" />
+            <Entry
+                Keyboard="Telephone"
+                Placeholder="Phone Number"
+                PlaceholderColor="Gray"
+                Visual="Material" />
+            <Entry
+                Keyboard="Email"
+                Placeholder="Email"
+                PlaceholderColor="Gray"
+                Visual="Material" />
+
 
             <Button
-                Grid.Row="3"
+                Grid.Row="1"
                 BackgroundColor="#e04a00"
-                Command="{Binding RegisterCommand}"
+                Command="{Binding SubmitReportCommand}"
                 FontSize="19"
                 HeightRequest="50"
-                Text="Register"
+                Text="Submit"
                 TextColor="White" />
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-        </Grid>
+        </StackLayout>
     </ScrollView>
 </ContentPage>

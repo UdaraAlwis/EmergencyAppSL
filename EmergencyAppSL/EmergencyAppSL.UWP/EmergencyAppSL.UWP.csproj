@@ -146,6 +146,9 @@
     <PackageReference Include="Prism.Unity.Forms">
       <Version>7.1.0.431</Version>
     </PackageReference>
+    <PackageReference Include="Xam.Plugin.Media">
+      <Version>4.0.1.5</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.FFImageLoading">
       <Version>2.4.5.909-pre</Version>
     </PackageReference>
