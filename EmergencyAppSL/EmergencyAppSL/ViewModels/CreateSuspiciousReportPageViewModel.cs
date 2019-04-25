@@ -18,8 +18,8 @@ using Xamarin.Forms;
 
 namespace EmergencyAppSL.ViewModels
 {
-	public class CreateSuspiciousReportPageViewModel : ViewModelBase
-	{
+    public class CreateSuspiciousReportPageViewModel : ViewModelBase
+    {
         private readonly INavigationService _navigationService;
         private readonly IPageDialogService _pageDialogService;
         private readonly IReportService _reportService;
@@ -28,13 +28,16 @@ namespace EmergencyAppSL.ViewModels
         private string _dateTimeValue;
         private List<string> _reportTypeList;
         private string _selectedReportType;
+        private string _userPhoneNumber;
+        private string _userNicNumber;
+        private string _userEmail;
 
         public ImageSource CapturedPhoto
         {
             get => _capturedPhoto;
             set
             {
-                SetProperty(ref _capturedPhoto, value); 
+                SetProperty(ref _capturedPhoto, value);
                 RaisePropertyChanged(nameof(IsPhotoAttached));
             }
         }
@@ -54,7 +57,7 @@ namespace EmergencyAppSL.ViewModels
         }
 
         public bool IsDateTimeUpdateTimerRunning = false;
-
+        
         public List<string> ReportTypeList
         {
             get => _reportTypeList;
@@ -67,12 +70,28 @@ namespace EmergencyAppSL.ViewModels
             set => SetProperty(ref _selectedReportType, value);
         }
 
-        public string UserPhoneNumber { get; set; }
-        public string UserNicNumber { get; set; }
-        public string UserEmail { get; set; }
+        public string UserPhoneNumber
+        {
+            get => _userPhoneNumber;
+            set => SetProperty(ref _userPhoneNumber, value);
+        }
+
+        public string UserNicNumber
+        {
+            get => _userNicNumber;
+            set => SetProperty(ref _userNicNumber, value);
+        }
+
+        public string UserEmail
+        {
+            get => _userEmail;
+            set => SetProperty(ref _userEmail, value);
+        }
+
+        public DelegateCommand SelectReportTypeCommand { get; private set; }
 
         public DelegateCommand AddPhotoCommand { get; private set; }
-        
+
         public DelegateCommand RemovePhotoCommand { get; private set; }
 
         public DelegateCommand SubmitReportCommand { get; private set; }
@@ -82,6 +101,8 @@ namespace EmergencyAppSL.ViewModels
             _navigationService = navigationService;
             _pageDialogService = pageDialogService;
             _reportService = reportService;
+
+            SelectReportTypeCommand = new DelegateCommand(() => SelectReportType());
 
             AddPhotoCommand = new DelegateCommand(() => AddPhoto());
 
@@ -99,6 +120,15 @@ namespace EmergencyAppSL.ViewModels
             _navigationService.GoBackAsync();
         }
 
+        private async void SelectReportType()
+        {
+            var response = await _pageDialogService.DisplayActionSheetAsync(
+                "Select Report Type", "Cancel", null, ReportTypeList.ToArray());
+
+            if (response != null && response != "Cancel")
+                SelectedReportType = response;
+        }
+
         private async void AddPhoto()
         {
             var response = await _pageDialogService.DisplayActionSheetAsync(
@@ -106,7 +136,7 @@ namespace EmergencyAppSL.ViewModels
 
             if (response is null || response.Equals("Cancel"))
                 return;
-            
+
             var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
             var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
 
@@ -131,13 +161,13 @@ namespace EmergencyAppSL.ViewModels
 
                 if (userCapturedPhoto == null)
                     return;
-                
+
                 CapturedPhoto = ImageSource.FromStream(() => userCapturedPhoto.GetStream());
             }
             else
             {
                 await _pageDialogService.DisplayAlertAsync("Permissions Denied", "Unable to take photos or open gallery.", "OK");
-                
+
                 //On iOS you may want to send your user to the settings screen.
                 //CrossPermissions.Current.OpenAppSettings();
             }

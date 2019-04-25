@@ -77,11 +77,21 @@
                     Visual="Material" />
             </StackLayout>
 
-            <Picker
-                Title="Select Report Type"
-                ItemsSource="{Binding ReportTypeList}"
-                SelectedItem="{Binding SelectedReportType}"
-                Visual="Material" />
+            <!--  Emulated Picker Control  -->
+            <Grid>
+                <Entry
+                    IsReadOnly="True"
+                    Keyboard="Default"
+                    Placeholder="Select Report Type"
+                    PlaceholderColor="Gray"
+                    Text="{Binding SelectedReportType}"
+                    Visual="Material" />
+                <BoxView>
+                    <BoxView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SelectReportTypeCommand}" />
+                    </BoxView.GestureRecognizers>
+                </BoxView>
+            </Grid>
 
             <StackLayout Margin="0,20,0,20" Spacing="5">
                 <Label FontSize="15" Text="{Binding DateTimeValue, StringFormat='Reporting at: {0}'}" />
