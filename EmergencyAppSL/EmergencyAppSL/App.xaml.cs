@@ -2,6 +2,7 @@
 using Prism;
 using Prism.Ioc;
 using System;
+using EmergencyAppSL.Services;
 using EmergencyAppSL.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -35,6 +36,9 @@ namespace EmergencyAppSL
             containerRegistry.RegisterForNavigation<RegistrationPage, RegistrationPageViewModel>();
             containerRegistry.RegisterForNavigation<LandingPage, LandingPageViewModel>();
             containerRegistry.RegisterForNavigation<ReportHistoryPage, ReportHistoryPageViewModel>();
+
+            containerRegistry.Register<IReportService, ReportService>();
+            containerRegistry.RegisterForNavigation<ViewSuspiciousReportPage, ViewSuspiciousReportPageViewModel>();
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using EmergencyAppSL.Models;
 
 namespace EmergencyAppSL.Services
 {
-    interface IReportService
+    public interface IReportService
     {
-
+        List<SuspiciousReport> GetReportHistoryList();
     }
 }

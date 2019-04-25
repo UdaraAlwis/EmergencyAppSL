@@ -3,32 +3,80 @@
     x:Class="EmergencyAppSL.Views.ReportHistoryPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:extensions="clr-namespace:EmergencyAppSL.Extensions;assembly=EmergencyAppSL"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    Title="History"
+    Title="Report History"
     prism:ViewModelLocator.AutowireViewModel="True">
     <Grid>
         <ListView
             HasUnevenRows="True"
             ItemsSource="{Binding ReportHistoryList}"
+            SelectedItem="{Binding SelectedReportItem, Mode=TwoWay}"
             SeparatorVisibility="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid>
-                            <Image
+                        <Grid Padding="0,0,5,0" RowSpacing="0">
+                            <forms:CachedImage
                                 Grid.Row="0"
                                 Grid.Column="0"
-                                BackgroundColor="Red"
+                                Aspect="AspectFill"
+                                CacheDuration="1"
+                                DownsampleToViewSize="True"
+                                ErrorPlaceholder="{extensions:ImageResource EmergencyAppSL.Resources.applogo.png}"
+                                FadeAnimationEnabled="True"
+                                FadeAnimationForCachedImages="True"
                                 HeightRequest="100"
                                 HorizontalOptions="Start"
+                                LoadingPlaceholder="{extensions:ImageResource EmergencyAppSL.Resources.applogo.png}"
+                                Source="{Binding PhotoUrl}"
                                 WidthRequest="100" />
 
-                            <StackLayout Grid.Row="0" Grid.Column="1">
-                                <Label FontAttributes="Bold" Text="Event Title" />
-                                <Label Text="Event Description" />
-                                <Label Text="Event Date" />
+                            <StackLayout
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Padding="0,5,0,5">
+                                <Label
+                                    FontAttributes="Bold"
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="1"
+                                    Text="{Binding ReportTitle}" />
+                                <Label
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="3"
+                                    Text="{Binding ReportDescription}" />
+                                <Label
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="1"
+                                    Text="{Binding ReportDateTime, StringFormat='{0:f}'}" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="1"
+                                    Text="{Binding ReportType, StringFormat='Type: {0}'}" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="1"
+                                    Text="{Binding ReportStatus, StringFormat='Status: {0}'}" />
+                                <Label
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="1"
+                                    Text="{Binding ReportAddress}" />
                             </StackLayout>
 
+                            <BoxView
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                HeightRequest="0.5"
+                                Color="Red" />
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="0.5" />
+                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />

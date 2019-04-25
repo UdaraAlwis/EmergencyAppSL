@@ -5,13 +5,16 @@ using System.Text;
 
 namespace EmergencyAppSL.Models
 {
-    public class ReportHistoryModel : BindableBase
+    public class SuspiciousReport : BindableBase
     {
+        public string PhotoUrl { get; set; }
         public string ReportTitle { get; set; }
         public string ReportDescription { get; set; }
         public DateTime ReportDateTime { get; set; }
-        public int Status { get; set; }
-        public long ReportLocationLatitude { get; set; }
-        public long ReportLocationLongitude { get; set; }
+        public ReportType ReportType { get; set; }
+        public ReportStatus ReportStatus { get; set; }
+        public double ReportLocationLatitude { get; set; }
+        public double ReportLocationLongitude { get; set; }
+        public string ReportAddress { get; set; }
     }
 }

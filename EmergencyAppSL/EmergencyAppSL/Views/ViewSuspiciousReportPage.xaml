@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EmergencyAppSL.Views.ViewSuspiciousReportPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:extensions="clr-namespace:EmergencyAppSL.Extensions;assembly=EmergencyAppSL"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="Suspicious Report"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+    <ScrollView>
+        <StackLayout Padding="10,10,10,5">
+            <Label
+                FontAttributes="Bold"
+                FontSize="17"
+                Text="{Binding SelectedReportItem.ReportTitle}" />
+
+            <forms:CachedImage
+                Aspect="AspectFill"
+                CacheDuration="1"
+                DownsampleToViewSize="True"
+                ErrorPlaceholder="{extensions:ImageResource EmergencyAppSL.Resources.applogo.png}"
+                FadeAnimationEnabled="True"
+                FadeAnimationForCachedImages="True"
+                HorizontalOptions="FillAndExpand"
+                LoadingPlaceholder="{extensions:ImageResource EmergencyAppSL.Resources.applogo.png}"
+                Source="{Binding SelectedReportItem.PhotoUrl}" />
+
+            <Label Text="{Binding SelectedReportItem.ReportDescription}" />
+            <Label Text="{Binding SelectedReportItem.ReportDateTime, StringFormat='{0:f}'}" />
+            <Label FontAttributes="Bold" Text="{Binding SelectedReportItem.ReportType, StringFormat='Type: {0}'}" />
+            <Label FontAttributes="Bold" Text="{Binding SelectedReportItem.ReportStatus, StringFormat='Status: {0}'}" />
+            <Label Text="{Binding SelectedReportItem.ReportAddress}" />
+        </StackLayout>
+
+    </ScrollView>
+
+</ContentPage>
