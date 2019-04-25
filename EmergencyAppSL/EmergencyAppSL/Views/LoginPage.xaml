@@ -43,7 +43,8 @@
             FontSize="19"
             HeightRequest="50"
             Text="Login"
-            TextColor="White" />
+            TextColor="White"
+            VerticalOptions="EndAndExpand" />
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

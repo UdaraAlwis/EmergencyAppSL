@@ -22,6 +22,7 @@
 
             <Frame
                 Padding="0"
+                BackgroundColor="#f2f2f2"
                 HeightRequest="150"
                 IsClippedToBounds="True">
                 <Grid>
@@ -31,6 +32,8 @@
                         HorizontalTextAlignment="Center"
                         LineBreakMode="WordWrap"
                         Text="Capture or Attach supporting evidence photos."
+                        TextColor="Gray"
+                        VerticalTextAlignment="Center"
                         WidthRequest="100" />
 
                     <forms:CachedImage
@@ -39,7 +42,7 @@
                         Source="{Binding CapturedPhoto}" />
 
                     <Image
-                        Margin="0,5,5,0"
+                        Margin="0,10,10,0"
                         HeightRequest="40"
                         HorizontalOptions="End"
                         Source="{extensions:ImageResource EmergencyAppSL.Resources.addPhotoIcon.png}"
@@ -50,7 +53,7 @@
                         </Image.GestureRecognizers>
                     </Image>
                     <Image
-                        Margin="0,5,5,0"
+                        Margin="0,10,10,0"
                         HeightRequest="40"
                         HorizontalOptions="End"
                         IsVisible="{Binding IsPhotoAttached}"
@@ -64,37 +67,53 @@
                 </Grid>
             </Frame>
 
-            <Editor
-                Keyboard="Text"
-                Placeholder="Description (full explanation)"
-                PlaceholderColor="Gray"
+            <StackLayout>
+                <Editor
+                    AutoSize="TextChanges"
+                    Keyboard="Text"
+                    Placeholder="Description (full explanation)"
+                    PlaceholderColor="Gray"
+                    Visual="Material" />
+            </StackLayout>
+
+            <Picker
+                Title="Select Report Type"
+                ItemsSource="{Binding ReportTypeList}"
+                SelectedItem="{Binding SelectedReportType}"
                 Visual="Material" />
+
+            <StackLayout Margin="0,20,0,20" Spacing="5">
+                <Label FontSize="15" Text="{Binding DateTimeValue, StringFormat='Reporting at: {0}'}" />
+                <Label FontSize="15" Text="{Binding LocationAddress, StringFormat='Location: {0}'}" />
+            </StackLayout>
 
             <Entry
                 Keyboard="Default"
                 Placeholder="NIC Number"
                 PlaceholderColor="Gray"
+                Text="{Binding UserNicNumber}"
                 Visual="Material" />
             <Entry
                 Keyboard="Telephone"
                 Placeholder="Phone Number"
                 PlaceholderColor="Gray"
+                Text="{Binding UserPhoneNumber}"
                 Visual="Material" />
             <Entry
                 Keyboard="Email"
                 Placeholder="Email"
                 PlaceholderColor="Gray"
+                Text="{Binding UserEmail}"
                 Visual="Material" />
 
-
             <Button
-                Grid.Row="1"
                 BackgroundColor="#e04a00"
                 Command="{Binding SubmitReportCommand}"
                 FontSize="19"
                 HeightRequest="50"
                 Text="Submit"
-                TextColor="White" />
+                TextColor="White"
+                VerticalOptions="EndAndExpand" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

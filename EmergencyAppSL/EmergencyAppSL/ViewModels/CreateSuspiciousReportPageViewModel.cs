@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Bogus;
+using EmergencyAppSL.Extensions;
 using EmergencyAppSL.Models;
 using EmergencyAppSL.Services;
 using Plugin.Media;
@@ -22,6 +24,10 @@ namespace EmergencyAppSL.ViewModels
         private readonly IPageDialogService _pageDialogService;
         private readonly IReportService _reportService;
         private ImageSource _capturedPhoto;
+        private string _locationAddress;
+        private string _dateTimeValue;
+        private List<string> _reportTypeList;
+        private string _selectedReportType;
 
         public ImageSource CapturedPhoto
         {
@@ -30,6 +36,36 @@ namespace EmergencyAppSL.ViewModels
         }
 
         public bool IsPhotoAttached => CapturedPhoto != null;
+
+        public string DateTimeValue
+        {
+            get => _dateTimeValue;
+            set => SetProperty(ref _dateTimeValue, value);
+        }
+
+        public string LocationAddress
+        {
+            get => _locationAddress;
+            set => SetProperty(ref _locationAddress, value);
+        }
+
+        public bool IsDateTimeUpdateTimerRunning = false;
+
+        public List<string> ReportTypeList
+        {
+            get => _reportTypeList;
+            set => SetProperty(ref _reportTypeList, value);
+        }
+
+        public string SelectedReportType
+        {
+            get => _selectedReportType;
+            set => SetProperty(ref _selectedReportType, value);
+        }
+
+        public string UserPhoneNumber { get; set; }
+        public string UserNicNumber { get; set; }
+        public string UserEmail { get; set; }
 
         public DelegateCommand AddPhotoCommand { get; private set; }
         
@@ -53,6 +89,8 @@ namespace EmergencyAppSL.ViewModels
         private void SubmitReport()
         {
             _reportService.CreateReport(new SuspiciousReport());
+
+            _navigationService.GoBackAsync();
         }
 
         private async void AddPhoto()
@@ -108,7 +146,28 @@ namespace EmergencyAppSL.ViewModels
         {
             base.OnNavigatedTo(parameters);
 
+            var faker = new Faker("en");
+            LocationAddress = faker.Address.FullAddress();
+            DateTimeValue = DateTime.Now.ToString("f");
 
+            // Little timer to update the time display in UI
+            IsDateTimeUpdateTimerRunning = true;
+            Device.StartTimer(TimeSpan.FromMinutes(1), () =>
+            {
+                DateTimeValue = DateTime.Now.ToString("f");
+                return IsDateTimeUpdateTimerRunning;
+            });
+
+            ReportTypeList = new List<string>()
+            {
+                ReportType.SuspiciousObject.GetDescription(),
+                ReportType.SuspiciousPerson.GetDescription(),
+                ReportType.SuspiciousPlace.GetDescription(),
+            };
+
+            UserPhoneNumber = faker.Person.Phone;
+            UserEmail = faker.Person.Email;
+            UserNicNumber = string.Join("", faker.Person.Random.Digits(9));
         }
     }
 }
