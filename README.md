@@ -3,9 +3,8 @@ Emergency Alert &amp; Reporting App for Sri Lanka.
 
 Built with Xamarin.Forms directly supporting deploys to Android,iOS and UWP upon compilation in Visual Studio.
 
-Updated screenshots from the WIP demo:
+Updated screenshots from the WIP demo are as follows:
 
-<br />
 iOS:
 <br />
 
