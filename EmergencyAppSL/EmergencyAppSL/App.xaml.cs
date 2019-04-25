@@ -36,9 +36,10 @@ namespace EmergencyAppSL
             containerRegistry.RegisterForNavigation<RegistrationPage, RegistrationPageViewModel>();
             containerRegistry.RegisterForNavigation<LandingPage, LandingPageViewModel>();
             containerRegistry.RegisterForNavigation<ReportHistoryPage, ReportHistoryPageViewModel>();
+            containerRegistry.RegisterForNavigation<CreateSuspiciousReportPage, CreateSuspiciousReportPageViewModel>();
+            containerRegistry.RegisterForNavigation<ViewSuspiciousReportPage, ViewSuspiciousReportPageViewModel>();
 
             containerRegistry.Register<IReportService, ReportService>();
-            containerRegistry.RegisterForNavigation<ViewSuspiciousReportPage, ViewSuspiciousReportPageViewModel>();
         }
     }
 }

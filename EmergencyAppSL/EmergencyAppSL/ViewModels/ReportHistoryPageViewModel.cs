@@ -40,6 +40,8 @@ namespace EmergencyAppSL.ViewModels
         }
 
         public DelegateCommand<SuspiciousReport> GoToSelectedReportItemCommand { get; private set; }
+
+        public DelegateCommand GoToCreateSuspiciousReportPageCommand { get; private set; }
         
         public ReportHistoryPageViewModel(INavigationService navigationService, IReportService reportService) : base(navigationService)
         {
@@ -47,6 +49,13 @@ namespace EmergencyAppSL.ViewModels
             _reportService = reportService;
 
             GoToSelectedReportItemCommand = new DelegateCommand<SuspiciousReport>((selectedItem) => GoToSelectedReportItem(selectedItem));
+
+            GoToCreateSuspiciousReportPageCommand = new DelegateCommand(() => GoToCreateSuspiciousReportPage());
+        }
+
+        private void GoToCreateSuspiciousReportPage()
+        {
+            _navigationService.NavigateAsync(nameof(CreateSuspiciousReportPage));
         }
 
         private void GoToSelectedReportItem(SuspiciousReport selectedItem)
