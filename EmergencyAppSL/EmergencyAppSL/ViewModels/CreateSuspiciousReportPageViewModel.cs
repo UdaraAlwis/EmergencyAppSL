@@ -32,7 +32,11 @@ namespace EmergencyAppSL.ViewModels
         public ImageSource CapturedPhoto
         {
             get => _capturedPhoto;
-            set => SetProperty(ref _capturedPhoto, value);
+            set
+            {
+                SetProperty(ref _capturedPhoto, value); 
+                RaisePropertyChanged(nameof(IsPhotoAttached));
+            }
         }
 
         public bool IsPhotoAttached => CapturedPhoto != null;
@@ -88,6 +92,8 @@ namespace EmergencyAppSL.ViewModels
 
         private void SubmitReport()
         {
+            IsDateTimeUpdateTimerRunning = false;
+
             _reportService.CreateReport(new SuspiciousReport());
 
             _navigationService.GoBackAsync();
@@ -142,9 +148,11 @@ namespace EmergencyAppSL.ViewModels
             CapturedPhoto = null;
         }
 
-        public override async void OnNavigatedTo(INavigationParameters parameters)
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
+
+            //coming into page
 
             var faker = new Faker("en");
             LocationAddress = faker.Address.FullAddress();
@@ -168,6 +176,14 @@ namespace EmergencyAppSL.ViewModels
             UserPhoneNumber = faker.Person.Phone;
             UserEmail = faker.Person.Email;
             UserNicNumber = string.Join("", faker.Person.Random.Digits(9));
+        }
+
+        public override void OnNavigatingTo(INavigationParameters parameters)
+        {
+            base.OnNavigatingTo(parameters);
+
+            // going back from page
+            IsDateTimeUpdateTimerRunning = false;
         }
     }
 }

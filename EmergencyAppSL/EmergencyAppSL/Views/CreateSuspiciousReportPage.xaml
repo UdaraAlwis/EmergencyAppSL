@@ -45,6 +45,7 @@
                         Margin="0,10,10,0"
                         HeightRequest="40"
                         HorizontalOptions="End"
+                        IsVisible="{Binding IsPhotoAttached, Converter={x:StaticResource inverseBooleanConv}}"
                         Source="{extensions:ImageResource EmergencyAppSL.Resources.addPhotoIcon.png}"
                         VerticalOptions="Start"
                         WidthRequest="40">
