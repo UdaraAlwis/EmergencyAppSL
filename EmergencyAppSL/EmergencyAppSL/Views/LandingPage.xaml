@@ -35,7 +35,7 @@
                 Grid.Row="0"
                 BackgroundColor="#e04a00"
                 Command="{Binding GoToLoginCommand}"
-                FontSize="20"
+                FontSize="19"
                 HeightRequest="50"
                 Text="Login"
                 TextColor="White" />
@@ -44,7 +44,7 @@
                 Grid.Row="1"
                 BackgroundColor="#e04a00"
                 Command="{Binding GoToRegisterCommand}"
-                FontSize="20"
+                FontSize="19"
                 HeightRequest="50"
                 Text="Registration"
                 TextColor="White" />

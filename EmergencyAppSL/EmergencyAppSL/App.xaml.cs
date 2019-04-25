@@ -25,7 +25,7 @@ namespace EmergencyAppSL
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync($"NavigationPage/{nameof(ReportHistoryPage)}");
+            await NavigationService.NavigateAsync($"NavigationPage/{nameof(LandingPage)}");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

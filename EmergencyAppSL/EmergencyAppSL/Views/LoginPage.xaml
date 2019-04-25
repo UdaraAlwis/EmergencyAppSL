@@ -39,7 +39,8 @@
         <Button
             Grid.Row="4"
             BackgroundColor="#e04a00"
-            FontSize="20"
+            Command="{Binding LoginCommand}"
+            FontSize="19"
             HeightRequest="50"
             Text="Login"
             TextColor="White" />

@@ -64,7 +64,8 @@
             <Button
                 Grid.Row="3"
                 BackgroundColor="#e04a00"
-                FontSize="20"
+                Command="{Binding RegisterCommand}"
+                FontSize="19"
                 HeightRequest="50"
                 Text="Register"
                 TextColor="White" />

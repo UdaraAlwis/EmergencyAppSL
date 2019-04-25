@@ -14,6 +14,19 @@
             ItemsSource="{Binding ReportHistoryList}"
             SelectedItem="{Binding SelectedReportItem, Mode=TwoWay}"
             SeparatorVisibility="None">
+            <ListView.Header>
+                <StackLayout Padding="10,10,10,10" Orientation="Vertical">
+                    <Button
+                        BackgroundColor="#e04a00"
+                        Command="{Binding GoToLoginCommand}"
+                        FontSize="19"
+                        HeightRequest="50"
+                        Text="Create new Report"
+                        TextColor="White" />
+                    <Label FontSize="17" Text="Create a new report for a Suspicious Activity, Event, Object, or Person from above." />
+                    <Label FontSize="17" Text="You can view the history of the Reports you have created from bottom." />
+                </StackLayout>
+            </ListView.Header>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -39,6 +52,7 @@
                                 Padding="0,5,0,5">
                                 <Label
                                     FontAttributes="Bold"
+                                    FontSize="17"
                                     LineBreakMode="TailTruncation"
                                     MaxLines="1"
                                     Text="{Binding ReportTitle}" />
@@ -51,12 +65,10 @@
                                     MaxLines="1"
                                     Text="{Binding ReportDateTime, StringFormat='{0:f}'}" />
                                 <Label
-                                    FontAttributes="Bold"
                                     LineBreakMode="TailTruncation"
                                     MaxLines="1"
                                     Text="{Binding ReportType, StringFormat='Type: {0}'}" />
                                 <Label
-                                    FontAttributes="Bold"
                                     LineBreakMode="TailTruncation"
                                     MaxLines="1"
                                     Text="{Binding ReportStatus, StringFormat='Status: {0}'}" />
