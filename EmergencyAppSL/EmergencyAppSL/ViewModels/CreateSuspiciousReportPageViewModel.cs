@@ -15,6 +15,7 @@ using Plugin.Permissions.Abstractions;
 using Prism.Navigation;
 using Prism.Services;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace EmergencyAppSL.ViewModels
 {
@@ -178,11 +179,13 @@ namespace EmergencyAppSL.ViewModels
             CapturedPhoto = null;
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public async override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
 
             //coming into page
+
+            var location = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Medium));
 
             var faker = new Faker("en");
             LocationAddress = faker.Address.FullAddress();
