@@ -54,7 +54,7 @@ namespace EmergencyAppSL.UWP
 
                 Xamarin.Forms.Forms.Init(e);
 
-                Xamarin.FormsMaps.Init("ArnKNP3QdJTHjuESxRCmORF5LC_FH50lb2sNcrGEe6GLMB6z8GPu-l2xK4REXzC_");
+                Xamarin.FormsMaps.Init("BAhAzek7kLO3Bc6pRec5~XH5pPmI05kiPXA6P5iRnYg~Aov6kKQvbrGMve9JvFuvcZY7Pvv-bOxChfrTHyW98XCCZoeFUKyJWz88EOOIGXWG");
 
                 FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
 
