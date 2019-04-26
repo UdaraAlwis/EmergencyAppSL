@@ -28,6 +28,8 @@ namespace EmergencyAppSL.iOS
 
             global::Xamarin.Forms.FormsMaterial.Init();
 
+            Xamarin.FormsMaps.Init();
+
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
 
             LoadApplication(new App(new iOSInitializer()));

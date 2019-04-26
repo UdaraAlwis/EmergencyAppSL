@@ -16,6 +16,7 @@ using Prism.Navigation;
 using Prism.Services;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using Xamarin.Forms.Maps;
 
 namespace EmergencyAppSL.ViewModels
 {
@@ -187,8 +188,18 @@ namespace EmergencyAppSL.ViewModels
 
             var location = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Medium));
 
+            if (location != null)
+            {
+                var geoCoder = new Geocoder();
+                var position = new Position(location.Latitude, location.Longitude);
+                var possibleAddresses = await geoCoder.GetAddressesForPositionAsync(position);
+                //foreach (var address in possibleAddresses)
+                //    reverseGeocodedOutputLabel.Text += address + "\n";
+                LocationAddress = possibleAddresses.FirstOrDefault();
+            }
+
             var faker = new Faker("en");
-            LocationAddress = faker.Address.FullAddress();
+            //LocationAddress = faker.Address.FullAddress();
             DateTimeValue = DateTime.Now.ToString("f");
 
             // Little timer to update the time display in UI

@@ -21,6 +21,8 @@ namespace EmergencyAppSL.Droid
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
+            global::Xamarin.FormsMaps.Init(this, savedInstanceState);
+
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(false);
 
             CrossCurrentActivity.Current.Init(this, savedInstanceState);

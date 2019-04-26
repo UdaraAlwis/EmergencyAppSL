@@ -6,6 +6,7 @@
     xmlns:extensions="clr-namespace:EmergencyAppSL.Extensions;assembly=EmergencyAppSL"
     xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:iOsSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     Title="Create Report"
     iOsSpecific:Page.UseSafeArea="true"
@@ -96,6 +97,11 @@
             <StackLayout Margin="0,20,0,20" Spacing="5">
                 <Label FontSize="15" Text="{Binding DateTimeValue, StringFormat='Reporting at: {0}'}" />
                 <Label FontSize="15" Text="{Binding LocationAddress, StringFormat='Location: {0}'}" />
+                <maps:Map
+                    HeightRequest="200"
+                    HorizontalOptions="FillAndExpand"
+                    IsShowingUser="true"
+                    MapType="Hybrid" />
             </StackLayout>
 
             <Entry
