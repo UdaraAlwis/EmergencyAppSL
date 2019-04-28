@@ -100,7 +100,7 @@
                 <maps:Map
                     HeightRequest="200"
                     HorizontalOptions="FillAndExpand"
-                    IsShowingUser="true"
+                    IsShowingUser="{Binding IsLocationPermissionEnabled}"
                     MapType="Hybrid" />
             </StackLayout>
 

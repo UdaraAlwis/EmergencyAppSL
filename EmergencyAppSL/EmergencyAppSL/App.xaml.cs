@@ -40,6 +40,7 @@ namespace EmergencyAppSL
             containerRegistry.RegisterForNavigation<ViewSuspiciousReportPage, ViewSuspiciousReportPageViewModel>();
 
             containerRegistry.Register<IReportService, ReportService>();
+            containerRegistry.Register<ILocationService, LocationService>();
         }
     }
 }

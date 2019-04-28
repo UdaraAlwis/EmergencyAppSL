@@ -16,7 +16,7 @@ namespace EmergencyAppSL.Services
                 .RuleFor(bp => bp.ReportTitle, f => f.Lorem.Sentence())
                 .RuleFor(bp => bp.ReportDescription, f => f.Lorem.Paragraphs())
                 .RuleFor(bp => bp.ReportDateTime, f => f.Date.Past())
-                .RuleFor(bp => bp.ReportType, f => f.PickRandomParam(new ReportType[] { ReportType.SuspiciousObject, ReportType.SuspiciousPlace, ReportType.SuspiciousPerson }))
+                .RuleFor(bp => bp.ReportType, f => f.PickRandomParam(new ReportType[] { ReportType.SuspiciousObject, ReportType.SuspiciousPlace, ReportType.SuspiciousPerson, ReportType.SuspiciousObject }))
                 .RuleFor(bp => bp.ReportStatus, f => f.PickRandomParam(new ReportStatus[] { ReportStatus.Pending, ReportStatus.Investigating, ReportStatus.Resolved }))
                 .RuleFor(bp => bp.ReportLocationLatitude, f => f.Address.Latitude())
                 .RuleFor(bp => bp.ReportLocationLongitude, f => f.Address.Longitude())

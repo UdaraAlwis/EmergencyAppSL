@@ -13,5 +13,7 @@ namespace EmergencyAppSL.Models
         SuspiciousPlace,
         [Description("Suspicious Person")]
         SuspiciousPerson,
+        [Description("Suspicious Activity")]
+        SuspiciousActivity,
     }
 }

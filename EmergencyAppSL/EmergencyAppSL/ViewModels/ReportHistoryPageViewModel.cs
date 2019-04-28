@@ -1,19 +1,14 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using Bogus;
-using EmergencyAppSL.Models;
+﻿using EmergencyAppSL.Models;
 using EmergencyAppSL.Services;
 using EmergencyAppSL.Views;
+using Prism.Commands;
 using Prism.Navigation;
+using System.Collections.ObjectModel;
 
 namespace EmergencyAppSL.ViewModels
 {
-	public class ReportHistoryPageViewModel : ViewModelBase
-	{
+    public class ReportHistoryPageViewModel : ViewModelBase
+    {
         private readonly INavigationService _navigationService;
         private readonly IReportService _reportService;
         private ObservableCollection<SuspiciousReport> _reportHistoryList;
@@ -42,7 +37,7 @@ namespace EmergencyAppSL.ViewModels
         public DelegateCommand<SuspiciousReport> GoToSelectedReportItemCommand { get; private set; }
 
         public DelegateCommand GoToCreateSuspiciousReportPageCommand { get; private set; }
-        
+
         public ReportHistoryPageViewModel(INavigationService navigationService, IReportService reportService) : base(navigationService)
         {
             _navigationService = navigationService;

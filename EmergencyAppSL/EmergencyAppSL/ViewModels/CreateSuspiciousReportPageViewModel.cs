@@ -33,6 +33,7 @@ namespace EmergencyAppSL.ViewModels
         private string _userPhoneNumber;
         private string _userNicNumber;
         private string _userEmail;
+        private bool _isLocationPermissionEnabled;
 
         public ImageSource CapturedPhoto
         {
@@ -59,7 +60,7 @@ namespace EmergencyAppSL.ViewModels
         }
 
         public bool IsDateTimeUpdateTimerRunning = false;
-        
+
         public List<string> ReportTypeList
         {
             get => _reportTypeList;
@@ -88,6 +89,12 @@ namespace EmergencyAppSL.ViewModels
         {
             get => _userEmail;
             set => SetProperty(ref _userEmail, value);
+        }
+
+        public bool IsLocationPermissionEnabled
+        {
+            get => _isLocationPermissionEnabled;
+            set => SetProperty(ref _isLocationPermissionEnabled, value);
         }
 
         public DelegateCommand SelectReportTypeCommand { get; private set; }
@@ -139,39 +146,46 @@ namespace EmergencyAppSL.ViewModels
             if (response is null || response.Equals("Cancel"))
                 return;
 
-            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
-            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
-
-            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+            try
             {
-                var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
-                cameraStatus = results[Permission.Camera];
-                storageStatus = results[Permission.Storage];
+                var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+                var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+
+                if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+                {
+                    var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
+                    cameraStatus = results[Permission.Camera];
+                    storageStatus = results[Permission.Storage];
+                }
+
+                if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
+                {
+                    MediaFile userCapturedPhoto = null;
+
+                    userCapturedPhoto = response.Equals("Photo Library")
+                        ? await CrossMedia.Current.PickPhotoAsync()
+                        : await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions()
+                        {
+                            Directory = "EmergencyAppSLPhotos",
+                            Name = $"EmergencyAppSL_{DateTime.Now.Ticks}.jpg"
+                        });
+
+                    if (userCapturedPhoto == null)
+                        return;
+
+                    CapturedPhoto = ImageSource.FromStream(() => userCapturedPhoto.GetStream());
+                }
+                else
+                {
+                    await _pageDialogService.DisplayAlertAsync("Permissions Denied", "Unable to take photos or open gallery.", "OK");
+
+                    //On iOS you may want to send your user to the settings screen.
+                    //CrossPermissions.Current.OpenAppSettings();
+                }
             }
-
-            if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
+            catch (Exception ex)
             {
-                MediaFile userCapturedPhoto = null;
 
-                userCapturedPhoto = response.Equals("Photo Library")
-                    ? await CrossMedia.Current.PickPhotoAsync()
-                    : await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions()
-                    {
-                        Directory = "EmergencyAppSLPhotos",
-                        Name = $"EmergencyAppSL_{DateTime.Now.Ticks}.jpg"
-                    });
-
-                if (userCapturedPhoto == null)
-                    return;
-
-                CapturedPhoto = ImageSource.FromStream(() => userCapturedPhoto.GetStream());
-            }
-            else
-            {
-                await _pageDialogService.DisplayAlertAsync("Permissions Denied", "Unable to take photos or open gallery.", "OK");
-
-                //On iOS you may want to send your user to the settings screen.
-                //CrossPermissions.Current.OpenAppSettings();
             }
         }
 
@@ -186,16 +200,35 @@ namespace EmergencyAppSL.ViewModels
 
             //coming into page
 
-            var location = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Medium));
-
-            if (location != null)
+            try
             {
-                var geoCoder = new Geocoder();
-                var position = new Position(location.Latitude, location.Longitude);
-                var possibleAddresses = await geoCoder.GetAddressesForPositionAsync(position);
-                //foreach (var address in possibleAddresses)
-                //    reverseGeocodedOutputLabel.Text += address + "\n";
-                LocationAddress = possibleAddresses.FirstOrDefault();
+                var locationPermissionStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+
+                if (locationPermissionStatus != PermissionStatus.Granted)
+                {
+                    var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Location });
+                    locationPermissionStatus = results[Permission.Location];
+                }
+
+                if (locationPermissionStatus == PermissionStatus.Granted)
+                {
+                    IsLocationPermissionEnabled = true;
+
+                    var location = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Medium));
+                    if (location != null)
+                    {
+                        var geoCoder = new Geocoder();
+                        var position = new Position(location.Latitude, location.Longitude);
+                        var possibleAddresses = await geoCoder.GetAddressesForPositionAsync(position);
+                        //foreach (var address in possibleAddresses)
+                        //    reverseGeocodedOutputLabel.Text += address + "\n";
+                        LocationAddress = possibleAddresses.FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
 
             var faker = new Faker("en");
@@ -215,6 +248,7 @@ namespace EmergencyAppSL.ViewModels
                 ReportType.SuspiciousObject.GetDescription(),
                 ReportType.SuspiciousPerson.GetDescription(),
                 ReportType.SuspiciousPlace.GetDescription(),
+                ReportType.SuspiciousActivity.GetDescription(),
             };
 
             UserPhoneNumber = faker.Person.Phone;
