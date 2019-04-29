@@ -49,7 +49,12 @@ namespace EmergencyAppSL.Services
 
         public async Task<Location> GetLocation()
         {
-            return await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Medium));
+            var permissionStatis = await CheckLocationPermission();
+
+            if (permissionStatis.Item1)
+                return await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Medium));
+
+            return null;
         }
     }
 }
